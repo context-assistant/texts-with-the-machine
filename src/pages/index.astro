@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Sidebar } from '../components/Sidebar';
+import { HeroSection } from '../components/HeroSection';
+import { getAllLogs } from '../lib/logs';
+import { getAllAgents } from '../lib/agents';
+import { getAllQuotes } from '../lib/quotes';
+
+const logs = await getAllLogs();
+const agents = await getAllAgents();
+const quotes = await getAllQuotes();
+const randomQuote = quotes.length > 0 ? quotes[Math.floor(Math.random() * quotes.length)] : undefined;
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Texts with the Machine - AI Chat Logs">
+  <div class="app-container flex flex-row h-full w-full min-w-0 bg-background overflow-hidden">
+    <div class="sidebar-wrapper hidden md:block h-full shrink-0">
+      <Sidebar client:load logs={logs} basePath={base} />
+    </div>
+    <main class="main-view flex-1 h-full min-w-0 overflow-y-auto border-l border-border/50">
+      <HeroSection client:load logs={logs} agents={agents} quotes={quotes} featuredQuote={randomQuote} basePath={base} />
+    </main>
+  </div>
+</Layout>
+

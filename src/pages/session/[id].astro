@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Sidebar } from '../../components/Sidebar';
+import { ChatView } from '../../components/ChatView';
+import { getAllLogs } from '../../lib/logs';
+import { getAllAgents } from '../../lib/agents';
+
+export async function getStaticPaths() {
+  const logs = await getAllLogs();
+  const agents = await getAllAgents();
+  return logs.map((log) => ({
+    params: { id: log.id },
+    props: { log, allLogs: logs, agents },
+  }));
+}
+
+const { log, allLogs, agents } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title={`${log.agentName} - Chat Log`}>
+  <div class="app-container flex flex-row h-full w-full min-w-0 bg-background overflow-hidden">
+    <div class="sidebar-wrapper hidden md:block h-full shrink-0">
+        <Sidebar client:load logs={allLogs} currentSessionId={log.id} basePath={base} />
+    </div>
+    <main class="main-view flex-1 h-full min-w-0 overflow-hidden border-l border-border/50">
+      <ChatView client:load log={log} allLogs={allLogs} agents={agents} basePath={base} />
+    </main>
+  </div>
+</Layout>
