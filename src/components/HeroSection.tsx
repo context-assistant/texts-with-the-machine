@@ -77,7 +77,7 @@ export function HeroSection({ logs, agents, quotes = [], featuredQuote, basePath
             </h1>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            A collection of conversations with AI personalities. Explore chat logs, discover unique agent personalities, and dive into meaningful dialogues.
+            A collection of conversations with the AI personalities I'm crafting. Explore chat logs, discover unique agent personalities, and dive into meaningful dialogues colored by system prompts.
           </p>
         </div>
 
