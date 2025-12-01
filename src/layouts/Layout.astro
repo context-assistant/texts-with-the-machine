@@ -6,11 +6,25 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID;
+const isProd = import.meta.env.PROD;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- Google tag (gtag.js) -->
+		{isProd && GA_MEASUREMENT_ID && (
+			<>
+				<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+				<script define:vars={{ GA_MEASUREMENT_ID }}>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					gtag('config', GA_MEASUREMENT_ID);
+				</script>
+			</>
+		)}
 		<meta charset="UTF-8" />
 		<meta name="description" content="AI Chat Logs" />
 		<meta name="viewport" content="width=device-width" />
