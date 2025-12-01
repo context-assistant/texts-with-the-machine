@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Bot, User, Calendar, Cpu, Sparkles, MessageSquareQuote, Menu, X, Home } from 'lucide-react';
 import { format } from 'date-fns';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { LogEntry } from '../lib/logs';
 import type { AgentProfile } from '../lib/agents';
 import { ThemeToggle } from './ThemeToggle';
@@ -141,13 +143,21 @@ export function ChatView({ log, allLogs = [], agents = [], basePath }: ChatViewP
               )}
               
               <div
-                className={`chat-bubble-content max-w-[85%] md:max-w-[80%] rounded-2xl px-4 py-2 md:px-5 md:py-3 text-base whitespace-pre-wrap leading-relaxed ${
+                className={`chat-bubble-content markdown-content max-w-[85%] md:max-w-[80%] rounded-2xl px-4 py-2 md:px-5 md:py-3 text-base leading-relaxed ${
                   isUser
                     ? 'chat-bubble-user bg-primary text-primary-foreground rounded-tr-sm'
                     : 'chat-bubble-ai bg-muted text-foreground rounded-tl-sm'
                 }`}
               >
-                {msg.content}
+                {msg.src ? (
+                  <img 
+                    src={msg.src.startsWith('./') ? `${base}/${msg.src.substring(2)}` : msg.src}
+                    alt="User uploaded"
+                    className="max-w-full rounded-lg"
+                  />
+                ) : (
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                )}
               </div>
 
               {isUser && (

@@ -7,8 +7,9 @@ const LOGS_DIR = path.join(process.cwd(), 'logs');
 
 export interface ChatMessage {
   role: 'user' | 'assistant';
-  content: string;
+  content?: string;
   agentName?: string;
+  src?: string;
 }
 
 export interface LogEntry {
