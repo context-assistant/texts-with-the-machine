@@ -33,7 +33,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 31% 82%;
+    --primary: 210 31% 64%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -73,7 +73,9 @@
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--muted)) hsl(var(--primary));
 }
-
+.chat-messages-list {
+    max-width: 1200px;
+}
 .session-picker {
     background-color: hsl(var(--border));
 }

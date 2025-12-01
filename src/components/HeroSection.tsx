@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Bot, ArrowRight, Quote, RefreshCw } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { LogEntry } from '../lib/logs';
 import type { AgentProfile } from '../lib/agents';
 import type { AgentQuote } from '../lib/quotes';
@@ -76,10 +78,42 @@ export function HeroSection({ logs, agents, quotes = [], featuredQuote, basePath
               Texts with the Machine
             </h1>
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            A collection of conversations with the AI personalities I'm crafting. Explore chat logs, discover unique agent personalities, and dive into meaningful dialogues colored by system prompts.
+          <p className="text-xl md:text-2xl text-muted-foreground mx-auto">
+            A collection of conversations with the AI personalities I'm crafting. Explore chat logs, discover unique agent personalities, and dive into (sometimes) meaningful dialogues colored by system prompts.
           </p>
         </div>
+
+        {/* Random Quote */}
+        {currentQuote && (
+          <div className="mt-12 flex justify-center">
+            <a 
+              href={`${base}/session/${currentQuote.sessionId}`}
+              className="group relative w-full p-12 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg text-center"
+            >
+              <Quote className="absolute top-4 left-4 h-8 w-8 text-primary/20 rotate-180" />
+              <Quote className="absolute bottom-4 right-4 h-8 w-8 text-primary/20" />
+              
+              <blockquote className="relative z-10">
+                <div className="text-xl md:text-2xl font-medium text-foreground italic mb-4 leading-relaxed markdown-content">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{currentQuote.quote}</ReactMarkdown>
+                </div>
+                <cite className="text-base text-muted-foreground not-italic flex items-center justify-center gap-2 group-hover:text-primary transition-colors">
+                  — {currentQuote.agentName}
+                  <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                </cite>
+              </blockquote>
+            </a>
+            {quotes.length > 1 && (
+              <button
+                  onClick={handleNewQuote}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground font-medium transition-colors"
+              >
+                  Another Quote
+              </button>
+            )}
+          </div>
+        )}
+
 
         {/* Agent Personality Cards */}
         {agents.length > 0 && (
@@ -115,29 +149,6 @@ export function HeroSection({ logs, agents, quotes = [], featuredQuote, basePath
           </div>
         )}
 
-        {/* Random Quote */}
-        {currentQuote && (
-          <div className="mt-12 flex justify-center">
-            <a 
-              href={`${base}/session/${currentQuote.sessionId}`}
-              className="group relative max-w-2xl w-full p-8 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg text-center"
-            >
-              <Quote className="absolute top-4 left-4 h-8 w-8 text-primary/20 rotate-180" />
-              <Quote className="absolute bottom-4 right-4 h-8 w-8 text-primary/20" />
-              
-              <blockquote className="relative z-10">
-                <p className="text-xl md:text-2xl font-medium text-foreground italic mb-4 leading-relaxed whitespace-pre-wrap">
-                  "{currentQuote.quote}"
-                </p>
-                <cite className="text-base text-muted-foreground not-italic flex items-center justify-center gap-2 group-hover:text-primary transition-colors">
-                  — {currentQuote.agentName}
-                  <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </cite>
-              </blockquote>
-            </a>
-          </div>
-        )}
-
 
         {/* CTA */}
         <div className="text-center pt-8 flex flex-wrap items-center justify-center gap-4">
@@ -151,15 +162,6 @@ export function HeroSection({ logs, agents, quotes = [], featuredQuote, basePath
             </a>
           )}
           
-          {quotes.length > 1 && (
-             <button
-                onClick={handleNewQuote}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground font-medium transition-colors"
-             >
-                <RefreshCw className="h-4 w-4" />
-                Another Quote
-             </button>
-          )}
         </div>
 
         {logs.length === 0 && (

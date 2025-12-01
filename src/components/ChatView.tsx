@@ -73,7 +73,7 @@ export function ChatView({ log, allLogs = [], agents = [], basePath }: ChatViewP
           </div>
           <div className="space-y-1 min-w-0">
             <h1 className="text-lg md:text-2xl font-bold tracking-tight truncate">{log.agentName}</h1>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-lg text-muted-foreground">
                 <div className="flex items-center gap-1">
                     <Cpu className="h-3 w-3" />
                     <span>{log.modelName}</span>
@@ -84,20 +84,20 @@ export function ChatView({ log, allLogs = [], agents = [], basePath }: ChatViewP
                 </div>
             </div>
             {agent?.description && (
-                <p className="text-base text-muted-foreground/80 mt-2 line-clamp-2 max-w-xl">
+                <p className="text-lg text-muted-foreground/80 mt-2 line-clamp-2 max-w-xl">
                     {agent.description}
                 </p>
             )}
             {(log.personality || log.communicationStyle) && (
                 <div className="flex flex-wrap gap-2 mt-2 hidden sm:flex">
                     {log.personality && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-md font-medium">
                             <Sparkles className="h-3 w-3" />
                             {log.personality}
                         </span>
                     )}
                     {log.communicationStyle && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-md font-medium">
                             <MessageSquareQuote className="h-3 w-3" />
                             {log.communicationStyle}
                         </span>
@@ -119,8 +119,8 @@ export function ChatView({ log, allLogs = [], agents = [], basePath }: ChatViewP
       </header>
 
       {/* Messages */}
-      <div className="chat-messages-container w-full flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
-        <div className="chat-messages-list w-full max-w-[800px] mx-auto space-y-6">
+      <div className="chat-messages-container w-full flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
+        <div className="chat-messages-list w-full mx-auto space-y-6">
         {log.messages.map((msg, index) => {
           const isUser = msg.role === 'user';
           return (
@@ -143,7 +143,7 @@ export function ChatView({ log, allLogs = [], agents = [], basePath }: ChatViewP
               )}
               
               <div
-                className={`chat-bubble-content markdown-content max-w-[85%] md:max-w-[80%] rounded-2xl px-4 py-2 md:px-5 md:py-3 text-base leading-relaxed ${
+                className={`chat-bubble-content markdown-content max-w-[85%] md:max-w-[80%] rounded-2xl px-4 py-2 md:px-5 md:py-3 text-lg leading-relaxed ${
                   isUser
                     ? 'chat-bubble-user bg-primary text-primary-foreground rounded-tr-sm'
                     : 'chat-bubble-ai bg-muted text-foreground rounded-tl-sm'
