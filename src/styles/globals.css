@@ -80,6 +80,16 @@
     background-color: hsl(var(--border));
 }
 
+.current-quote-container {
+  position: relative;
+}
+
+.another-quote-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 /* Markdown Styles */
 .markdown-content p {
   @apply mb-2 last:mb-0;

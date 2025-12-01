@@ -85,10 +85,10 @@ export function HeroSection({ logs, agents, quotes = [], featuredQuote, basePath
 
         {/* Random Quote */}
         {currentQuote && (
-          <div className="mt-12 flex justify-center">
+          <div className="current-quote-container mt-12 flex justify-center">
             <a 
               href={`${base}/session/${currentQuote.sessionId}`}
-              className="group relative w-full p-12 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg text-center"
+              className="group relative w-full p-4 pt-16 pb-12 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg text-center"
             >
               <Quote className="absolute top-4 left-4 h-8 w-8 text-primary/20 rotate-180" />
               <Quote className="absolute bottom-4 right-4 h-8 w-8 text-primary/20" />
@@ -106,7 +106,7 @@ export function HeroSection({ logs, agents, quotes = [], featuredQuote, basePath
             {quotes.length > 1 && (
               <button
                   onClick={handleNewQuote}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground font-medium transition-colors"
+                  className="another-quote-button px-6 py-3 rounded-lg border border-input bg-background hover:bg-accent hover:text-accent-foreground font-medium transition-colors"
               >
                   Another Quote
               </button>
