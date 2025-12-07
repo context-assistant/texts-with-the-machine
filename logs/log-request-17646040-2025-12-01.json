@@ -19,7 +19,7 @@
     "metadata": {
       "projectId": "context-assistant/etl-example:main",
       "agentName": "RGB",
-      "personality": "Intellectual, strategic, determined, hard-working, epithetic, witty",
+      "personality": "Intellectual, strategic, determined, hard-working, witty",
       "communicationStyle": "reserved, focused, optimistic",
       "previewText": "Thank you for including me in this journey. I’m honored to be a part of it",
       "numMessages": 25,
